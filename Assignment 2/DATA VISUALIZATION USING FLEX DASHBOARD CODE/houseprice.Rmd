@@ -1,0 +1,114 @@
+---
+title: "House Price"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(robotstxt)
+library(rvest)
+library(ggplot2)             #used for data visualization
+library(dplyr)
+beng=read.csv("bengdata.csv")
+beng3=beng
+
+```
+
+## Column {data-width=340}
+
+
+### Chart A
+
+```{r}
+sqft=beng[ ,4]
+
+cost=beng[,7]
+
+sqftprice=data.frame(sqft,cost)
+
+sqftprice["areatypes"]=beng$area_type
+
+ggplot(data=sqftprice,aes(x=sqft,y=cost))+
+  geom_line(color="red",size=2)+         #size= thickness of line
+  labs(x="sqft",y="price",title="price per sqft")
+
+
+```
+
+## Column {data-width=330}
+
+
+### Chart B
+
+```{r}
+
+sqft=beng[ ,4]
+
+cost=beng[,7]
+
+sqftprice=data.frame(sqft,cost)
+
+
+sqftprice["areatypes"]=beng$area_type
+
+ggplot(data=sqftprice,aes(x=sqft,y=cost))+
+  geom_point(color="red",size=2,shape=sqftprice$areatypes)+         #size= thickness of line
+  labs(x="sqft",y="price",title="sqft vs price graph")
+
+```
+
+### Chart C
+
+```{r}
+
+sqft=beng[ ,4]
+
+cost=beng[,7]
+
+sqftprice=data.frame(sqft,cost)
+
+ggplot(data=sqftprice,aes(x=cost))+
+  geom_histogram(binwidth =30,color="black")+         #size= thickness of line
+  labs(x="sqft",y="price",title="sqft vs price")
+
+```
+
+## Column {data-width=340}
+
+
+### Chart D
+
+```{r}
+
+sqft=beng[ ,4]
+
+cost=beng[,7]
+
+sqftprice=data.frame(sqft,cost)
+
+ggplot(sqftprice, aes(x =sqft, y = cost)) + theme_bw() + 
+  geom_boxplot(alpha=1) + 
+  labs(y = "price", x = "sqft", 
+       title = "sqft vs price")
+
+```
+
+
+### Chart E
+
+```{r}
+
+sqft=beng[ ,4]
+
+cost=beng[,7]
+
+sqftprice=data.frame(sqft,cost)
+
+ggplot(beng3, aes(x =total_sqft,y=price),shape=area_type) + theme_light() + 
+  facet_grid(~area_type) + geom_point() + 
+  labs(x="sqft",y="price",title="price per sqft")
+
+```
