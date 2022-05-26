@@ -11,7 +11,7 @@ housedata=read.csv("House_Data.csv")
 View(housedata)
 
 
-bengdata=housedata
+bengdata=housedata  #referencing
 View(bengdata)
 
 #cleaning for special characters
@@ -168,7 +168,7 @@ ggplot(data=sqftprice,aes(x=sqft,y=cost))+
 #histogram of medical expenses
 
 ggplot(data=sqftprice,aes(x=cost))+
-  geom_histogram(binwidth =30,color="black")+         #size= thickness of line
+  geom_histogram(binwidth =30,color="black")+                       #size= thickness of line
   labs(x="sqft",y="price",title="sqft vs price")
 
 #box plot
